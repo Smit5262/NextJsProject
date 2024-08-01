@@ -1,0 +1,139 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  margin-top: 70px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.pageTitle {
+  text-align: center;
+  color: #34495e;
+  margin-bottom: 30px;
+  font-size: 36px;
+  border-bottom: 2px solid #3498db;
+  display: inline-block;
+  padding-bottom: 10px;
+  animation: bounce 1s ease-in-out;
+}
+
+.productsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.product {
+  flex: 1 1 calc(33.333% - 20px);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #ddd;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.productImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.productImage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productDetails {
+  text-align: center;
+}
+
+.productName {
+  color: #e67e22;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.productName:hover {
+  color: #d35400;
+}
+
+.productDescription {
+  margin-bottom: 20px;
+  color: #7f8c8d;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.productPrice {
+  color: #27ae60;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.buyButton {
+  padding: 12px 25px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.buyButton:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 100px;
+}
+
+.loading {
+  color: #34495e;
+}
+
+.error {
+  color: #e74c3c;
+}
+

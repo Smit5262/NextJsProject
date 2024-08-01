@@ -1,0 +1,95 @@
+.orderContainer {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .filterContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .filterSelect {
+    margin-left: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .orderList {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .orderCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .orderCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  
+  .delivered { background-color: #d4edda; color: #155724; }
+  .shipped { background-color: #cce5ff; color: #004085; }
+  .processing { background-color: #fff3cd; color: #856404; }
+  .cancelled { background-color: #f8d7da; color: #721c24; }
+  
+  .orderDetails {
+    margin-bottom: 15px;
+  }
+  
+  .viewButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .viewButton:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 600px) {
+    .orderCard {
+      padding: 15px;
+    }
+  
+    .orderHeader {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .status {
+      margin-top: 10px;
+    }
+  }

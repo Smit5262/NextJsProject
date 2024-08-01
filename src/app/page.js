@@ -3,93 +3,81 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
+    <div className={styles.container}>
+      <section className={styles.hero}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src="/heroimage.jpg"
+          alt="Hero Image"
+          width={1920}
+          height={600}
+          className={styles.heroImage}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <h1 className={styles.heroTitle}>Welcome to Our Shop</h1>
+        <p className={styles.heroSubtitle}>
+          Find the best products at unbeatable prices
+        </p>
+        <button className={styles.ctaButton}>Shop Now</button>
+      </section>
+      <section className={styles.featured}>
+        <h2 className={styles.sectionTitle}>Featured Products</h2>
+        <div className={styles.productGrid}>
+          {[1, 2, 3, 4, 5, 6].map((product) => (
+            <div key={product} className={styles.productCard}>
+              <Image
+                src={`/${product}.jpg`}
+                alt={`Product ${product}`}
+                width={300}
+                height={300}
+                className={styles.productImage}
+              />
+              <h3 className={styles.productTitle}>Product {product}</h3>
+              <p className={styles.productPrice}>$99.99</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className={styles.categories}>
+        <h2 className={styles.sectionTitle}>Categories</h2>
+        <div className={styles.categoryGrid}>
+          <div className={styles.categoryCard}>
+            <Image
+              src="/category1.jpg"
+              alt="Category 1"
+              width={300}
+              height={300}
+              className={styles.categoryImage}
+            />
+            <h3 className={styles.categoryTitle}>Mobile Products</h3>
+          </div>
+          <div className={styles.categoryCard}>
+            <Image
+              src="/category2.jpg"
+              alt="Category 2"
+              width={300}
+              height={300}
+              className={styles.categoryImage}
+            />
+            <h3 className={styles.categoryTitle}>Beauty Products</h3>
+          </div>
+        </div>
+      </section>
+      <section className={styles.testimonials}>
+        <h2 className={styles.sectionTitle}>What Our Customers Say</h2>
+        <div className={styles.testimonialGrid}>
+          <div className={styles.testimonialCard}>
+            <p className={styles.testimonialText}>
+              Amazing products and top-notch customer service!
+            </p>
+            <p className={styles.testimonialAuthor}>- John Doe</p>
+          </div>
+          <div className={styles.testimonialCard}>
+            <p className={styles.testimonialText}>
+              Highly recommend this shop for quality products.
+            </p>
+            <p className={styles.testimonialAuthor}>- Jane Smith</p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

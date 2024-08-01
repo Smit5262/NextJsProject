@@ -1,0 +1,139 @@
+.accountContainer {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 20px;
+  font-family: "Roboto", Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accountInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.infoSection {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.infoSection h2 {
+  color: #444;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.infoSection p {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.editButton,
+.saveButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.editButton:hover,
+.saveButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.accountActions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionButton {
+  flex: 1;
+  margin: 0 10px;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.actionButton:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5em;
+  color: #007bff;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loading::after {
+  content: "...";
+  animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 768px) {
+  .accountInfo {
+    flex-direction: column;
+  }
+
+  .infoSection {
+    margin-bottom: 20px;
+  }
+
+  .accountActions {
+    flex-direction: column;
+  }
+
+  .actionButton {
+    margin: 10px 0;
+  }
+}
