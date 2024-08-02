@@ -27,6 +27,7 @@ import Header from "./header";
 import Footer from "./footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./AuthContext";
+import { ToastContainer } from "react-toastify";
 
 export default function RootLayout({ children }) {
   return (
@@ -36,6 +37,8 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
+      <ToastContainer />
+
         </AuthProvider>
       </body>
     </html>

@@ -63,3 +63,36 @@ export async function DELETE(request, { params }) {
     );
   }
 }
+
+export async function PATCH(request, { params }) {
+  const { id } = params;
+  const { quantity } = await request.json();
+
+  if (!ObjectId.isValid(id)) {
+    return NextResponse.json({ error: "Invalid ID format" }, { status: 400 });
+  }
+
+  const { userData } = await connectToDatabase();
+  try {
+    const result = await userData.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          quantity,
+        },
+      }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ error: "Cart item not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Cart item updated successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to update cart item" },
+      { status: 500 }
+    );
+  }
+}

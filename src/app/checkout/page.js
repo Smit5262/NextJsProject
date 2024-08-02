@@ -1,46 +1,42 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../cssFiles/checkout.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Checkout() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    country: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-  });
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const userId = Cookies.get("userId");
+  const router = useRouter();
 
   useEffect(() => {
-    const userId = Cookies.get("userId");
     if (userId) {
-      axios
-        .get(`/api/login?userId=${userId}`)
-        .then((response) => {
-          const data = response.data;
-          setCartData(data);
-          setTotal(calculateTotal(data));
-        })
-        .catch((error) => {
-          console.error("Error fetching the cart data", error);
-        });
+      fetchCartData();
+    } else {
+      setIsLoading(false);
+      toast.error("User ID not found. Please log in.");
     }
-  }, []);
+  }, [userId]);
 
-  useEffect(() => {
-    validateForm();
-  }, [formData]);
+  const fetchCartData = async () => {
+    try {
+      const response = await axios.get(`/api/login?userId=${userId}`);
+      const data = response.data;
+      setCartData(data);
+      setTotal(calculateTotal(data));
+    } catch (error) {
+      console.error("Error fetching the cart data", error);
+      toast.error("Failed to load cart data. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const calculateTotal = (data) => {
     return data
@@ -48,199 +44,39 @@ export default function Checkout() {
       .toFixed(2);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    const {
-      name,
-      email,
-      address,
-      city,
-      postalCode,
-      country,
-      cardNumber,
-      expiryDate,
-      cvv,
-    } = formData;
-    setIsFormValid(
-      name &&
-        email &&
-        address &&
-        city &&
-        postalCode &&
-        country &&
-        cardNumber &&
-        expiryDate &&
-        cvv
-    );
-  };
-
-  const handleSubmit = (e) => {
+  const placeOrder = async (e) => {
     e.preventDefault();
-    if (isFormValid) {
-      console.log("Form Data:", formData);
-      console.log("Cart Data:", cartData);
-      console.log("Total:", total);
-      toast.success("Order placed successfully!");
-
-      setFormData({
-        name: "",
-        email: "",
-        address: "",
-        city: "",
-        postalCode: "",
-        country: "",
-        cardNumber: "",
-        expiryDate: "",
-        cvv: "",
-      });
-      setCartData([]);
-      setTotal(0);
-    } else {
-      toast.error("Please fill out all fields.");
+    setIsLoading(true);
+    try {
+      await axios.delete(`/api/cart?userId=${userId}`);
+      toast.success("Cart cleared successfully!");
+      // console.log("Cart cleared successfully");
+      alert("Your order place sucessfully");
+      router.push("/Cart");
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast.info("No items found in the cart");
+      } else {
+        console.error("Error clearing the cart", error);
+        toast.error("Failed to clear the cart. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (cartData.length === 0) {
+    return <h1 className={styles.heading1}>Cart is empty</h1>;
+  }
+
   return (
     <div className={styles.container}>
-      <ToastContainer />
       <h1 className={styles.title}>Checkout</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Shipping Information</h2>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="name">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className={styles.input}
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className={styles.input}
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="address">
-              Address
-            </label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              className={styles.input}
-              value={formData.address}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="city">
-              City
-            </label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              className={styles.input}
-              value={formData.city}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="postalCode">
-              Postal Code
-            </label>
-            <input
-              type="text"
-              id="postalCode"
-              name="postalCode"
-              className={styles.input}
-              value={formData.postalCode}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="country">
-              Country
-            </label>
-            <input
-              type="text"
-              id="country"
-              name="country"
-              className={styles.input}
-              value={formData.country}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Payment Details</h2>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="cardNumber">
-              Card Number
-            </label>
-            <input
-              type="text"
-              id="cardNumber"
-              name="cardNumber"
-              className={styles.input}
-              value={formData.cardNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="expiryDate">
-              Expiry Date
-            </label>
-            <input
-              type="text"
-              id="expiryDate"
-              name="expiryDate"
-              className={styles.input}
-              value={formData.expiryDate}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="cvv">
-              CVV
-            </label>
-            <input
-              type="text"
-              id="cvv"
-              name="cvv"
-              className={styles.input}
-              value={formData.cvv}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
+      <form className={styles.form} onSubmit={placeOrder}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Order Summary</h2>
           <div className={styles.summary}>
@@ -261,9 +97,9 @@ export default function Checkout() {
         <button
           type="submit"
           className={styles.submitButton}
-          disabled={!isFormValid}
+          disabled={isLoading || cartData.length === 0}
         >
-          Place Order
+          {isLoading ? "Processing..." : "Place Order"}
         </button>
       </form>
     </div>

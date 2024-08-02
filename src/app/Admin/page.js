@@ -17,6 +17,7 @@ function AdminDashboard() {
     name: "",
     description: "",
     price: "",
+    quantity: "",
     image: "",
     category: "",
   });
@@ -49,6 +50,7 @@ function AdminDashboard() {
           name: "",
           description: "",
           price: "",
+          quantity: "",
           image: "",
           category: "",
         });
@@ -88,6 +90,15 @@ function AdminDashboard() {
               name="price"
               placeholder="Product Price"
               value={newProduct.price}
+              onChange={handleInputChange}
+              required
+              className={styles.input}
+            />
+            <input
+              type="number"
+              name="quantity"
+              placeholder="Product Quantity"
+              value={newProduct.quantity}
               onChange={handleInputChange}
               required
               className={styles.input}
