@@ -9,7 +9,6 @@ import { MdAccountCircle } from "react-icons/md";
 import { IoIosLogIn, IoMdLogOut } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./AuthContext";
-import Cart from "./Cart/page";
 
 function Header() {
   const { isLoggedIn, logout } = useAuth();

@@ -19,7 +19,4 @@ export async function POST(req) {
     return NextResponse.json({ isValid: false }, { status: 500 });
   }
 }
-
-export const config = {
-  runtime: 'experimental-edge', 
-};
+export const runtime = "experimental-edge";

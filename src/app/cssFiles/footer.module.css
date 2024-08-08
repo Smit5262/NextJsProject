@@ -1,7 +1,6 @@
-/* cssFiles/footer.module.css */
 .footer {
-  background-color: #1a1a1a;
-  color: #f5f5f5;
+  background-color: #2c3e50;
+  color: #ecf0f1;
   padding: 60px 0 30px;
   font-family: 'Arial', sans-serif;
 }
@@ -27,6 +26,7 @@
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #3498db;
 }
 
 .linkList {
@@ -39,14 +39,14 @@
 }
 
 .footerLink {
-  color: #b3b3b3;
+  color: #bdc3c7;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
 }
 
 .footerLink:hover {
-  color: #ffffff;
+  color: #3498db;
 }
 
 .newsletterText {
@@ -68,7 +68,7 @@
 }
 
 .newsletterButton {
-  background-color: #ff6347;
+  background-color: #3498db;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -78,7 +78,7 @@
 }
 
 .newsletterButton:hover {
-  background-color: #ff4500;
+  background-color: #2980b9;
 }
 
 .socialIcons {
@@ -87,17 +87,17 @@
 }
 
 .socialIcon {
-  color: #b3b3b3;
+  color: #bdc3c7;
   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
 .socialIcon:hover {
-  color: #ff6347;
+  color: #3498db;
 }
 
 .footerBottom {
-  border-top: 1px solid #333;
+  border-top: 1px solid #34495e;
   margin-top: 30px;
   padding-top: 30px;
   text-align: center;
@@ -112,20 +112,20 @@
 
 .paymentIcon {
   font-size: 2rem;
-  color: #b3b3b3;
+  color: #bdc3c7;
 }
 
 .footerText {
   margin: 0;
   font-size: 0.8rem;
-  color: #888;
+  color: #95a5a6;
 }
 
 @media (max-width: 768px) {
   .footerContent {
     flex-direction: column;
   }
-
+  
   .footerColumn {
     width: 100%;
     margin-bottom: 30px;
